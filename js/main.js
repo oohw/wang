@@ -31,7 +31,6 @@ function buildMenu(){
 		$(this).outerWidth( $($(this).children()[0]).outerWidth()  );
 		console.log( $($(this).children()[0]).outerWidth() );
 	});
-
 	console.log('built menu');
 };
 
