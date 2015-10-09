@@ -1,5 +1,6 @@
 var width, height, slideshow, gallery;
 
+var slideshow_margin = 0;
 $(document).ready(function() {
 	width = $(window).outerWidth();
 	height = $(window).outerHeight();
@@ -12,7 +13,7 @@ $( window ).resize(function() {
 
 function init(){
 	buildMenu();
-	buildSlideshow();
+	layoutSlideshow();
 	startSlideshow();
 	layout();
 };
@@ -34,41 +35,45 @@ function buildMenu(){
 	console.log('built menu');
 };
 
-function buildSlideshow(){
-	$('#slideshow').append('<div id="yeah" style="position:absolute; left:0px;"><h1>YEAH</h1></div>');
-	$('#yeah').css('left', '0px');
-
-	$('#yeah').css('position', 'absolute');
+function layoutSlideshow(){
+	slideshow_margin = width*0.1;
+	$('.slideshowImage').css('width',(width+slideshow_margin)+'px');
+	$('.slideshowImage').css('height','auto');
+	$('#slideshow').outerWidth($('.slideshowImage').size()*(width+slideshow_margin));
+	$('.slideshowImage').each(function(){$(this).css('top',('-' + ($(this).outerHeight()-height)*0.5) + 'px'); });
+	console.log(slideshow_margin + ' = margin');
 };
 
 function gallery(){
 	console.log("shityo");
 };
 
-function loadSlideshow(slideimages) {
-	slideshow = slideimages;
-}
-
+var slideshow_left = 0;
 function startSlideshow(){
-	$('#slideshow').css('transition', 'all 10s linear');
-	$('#slideshow').css('left', '100px');
-	$("#animator").css('font-size', 0).animate({ fontSize: 12.0 }, {
-	    duration: 10000,
+	// $('#slideshow').css('transition', 'all 5s linear');
+	// $('#slideshow').css('left', '-100px');
+	var newleft = slideshow_left+slideshow_margin;
+	$("#animator").css('font-size', slideshow_left).animate({ fontSize: newleft }, {
+	    duration: 4000,
 	    easing: 'linear',
 	    step: function(now,fx) {
-	    	// $('#slideshow').css('left',now);
+	    	$('#slideshow').css('left',-now);
 	    },
 	    complete: function(){
-
-			$('#slideshow').css('transition', 'all 1s linear');
-			$('#slideshow').css('left', '0px');
-	    	$("#animator").css('font-size', 12.0).animate({ fontSize: 0 }, {
-			    duration: 10000,
-			    easing: 'linear',
+	    	slideshow_left = newleft;
+	    	newleft += width;
+	    	newleft %= (width+slideshow_margin)*$('.slideshowImage').size();
+			// $('#slideshow').css('transition', 'all 1s linear');
+			// $('#slideshow').css('left', '0px');
+	    	$("#animator").css('font-size', slideshow_left).animate({ fontSize: newleft }, {
+			    duration: 250,
+			    easing: 'easeOutQuad',
 			    step: function(now,fx) {
-			    	// $('#slideshow').css('left',now);
+			    	$('#slideshow').css('left',-now);
 			    },
 			    complete: function(){
+	    			slideshow_left = newleft;
+	    			slideshow_left %= (width+slideshow_margin)*($('.slideshowImage').size()-1);
 					startSlideshow();
 			    }
 	});	    }
@@ -82,7 +87,7 @@ function startSlideshow(){
 // tools
 
 jQuery.fn.center = function (doTop, doLeft) {
-    this.css("position","absolute");
+    // this.css("position","absolute");
     if(doTop)
     	this.css("top", Math.max(0, (($(window).outerHeight() - $(this).outerHeight()) / 2) + 
                                                 $(window).scrollTop()) + "px");

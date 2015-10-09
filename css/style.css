@@ -10,18 +10,33 @@ body {
 	position:absolute;
 	top:0px;
 	left:0px;
-	width: 120%;
-	height:120%;
-	background-image: url('../img/yama_xt500_richard_01.jpg');
-	background-size: 100% 100%;
 }
 
-#menu_logo{
+.slideshowImage {
+	position:relative;
+	float:left;
+}
+
+#menu_logo {
+	height: 80px;
 	cursor: pointer;
+	transition: all 0.5s ease-in-out;
+	-webkit-filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) ) brightness( 100% );
+    filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) ); /* Same syntax as box-shadow */
+}
+#menu_logo:hover {
+	-webkit-filter: drop-shadow( 4px 4px 4px rgba(1,1,1,0.0) ) brightness( 0% );
+    filter: drop-shadow( 4px 4px 4px rgba(255,255,255,0.75) ); 
+}
+#menu_logo path{
+	fill:white;
+}
+#menu_logo:hover path{
+	/*fill:black;*/
 }
 
 #menu {
-	position: absolute;
+	position: fixed;
 }
 #menuas {
 	position: relative;
@@ -32,14 +47,14 @@ body {
 .menuitem {
     float: left;
 	transform-origin: 50% 50%;
-	transition: all 1s ease-in-out;
-	transform: scale(1.0);
-	-webkit-transform: scale(1.0);
+	transition: all 0.2s ease-in-out;
+	/*transform: scale(1.0);
+	-webkit-transform: scale(1.0);*/
 }
 
 .menuitem:hover {
-	transform: scale(1.1);
-	-webkit-transform: scale(1.1);
+	/*transform: scale(1.1);
+	-webkit-transform: scale(1.1);*/
 }
 
 #menu a {
@@ -55,11 +70,15 @@ body {
 #menu a:link, #menu a:visited {
     color: #FFFFFF;
 	font-weight: 900;
+    text-shadow: 4px 4px 14px rgba(0,0,0,0.75);
 }
 
 #menu a:hover {
 	/*color: #000000;*/
 	text-decoration: none;
+	color: #000000;
+	font-weight: 1200;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.0);
 }
 
 #menu a:active {
