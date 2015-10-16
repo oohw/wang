@@ -17,10 +17,18 @@ function init(){
 	startSlideshow();
 	layout();
 	$('#fb-page').hide(100);
-	// $('#contentainer').hide(100);
+	// $('#contactContent').hide(100);
 	$('.x').click(function(){
 		$(this).parent().hide(1000);
 	})
+	$('#menu_logo').mouseover(function(){
+		console.log("OVER LOGO");
+		$('#menu_logo path').css('fill','red');
+	});
+	$('#menu_logo').mouseout(function(){
+		console.log("OVER LOGO");
+		$('#menu_logo path').css('fill','white');
+	});
 };
 
 function layout(){
@@ -28,13 +36,14 @@ function layout(){
 	height = $(window).outerHeight();
 	$('#menu').center(false,true);
 	$('.fb-page').center(false,true);
-	$('#contentainer').width(width);
-	$('#contentainer').height(height);
-	$('#contentainer').css('top',height+'px');
-	$('#contentainer').center(false,true);
-	// var menuleft = (width - $('#menu').outerWidth())*0.5;
-	// $('#menu').css('left',menuleft+'px');
-	console.log('layouted menu ' +$('#menu').outerWidth());
+	$('#contactContent').width(width);
+	$('#contactContent').height(height);
+	$('#contactContent').offset({top : (height) });
+	$('#contactContent').css('padding-left',(width - ($('#contactMap').outerWidth()+500))+'px');
+	$('#gallery').width(width);
+	$('#gallery').height(height);
+	var gallerytop = $('#contactContent').offset().top + Math.max($('#contactContent').outerHeight(),$('#contactMap').outerHeight()+140);
+	$('#gallery').css('top',gallerytop + 'px');
 };
 
 function buildMenu(){
@@ -99,17 +108,31 @@ function facebook(){
 		$('#fb-page').show(100);
 }
 function wang(){
+	if($('#fb-page').is(":visible"))
+		$('#fb-page').hide(100);
     $('html, body').animate({
-        scrollTop: $("#contentainer").offset().top
+        scrollTop: 0
+    }, 200);
+}
+function gallery(){
+	if($('#fb-page').is(":visible"))
+		$('#fb-page').hide(100);
+    $('html, body').animate({
+        scrollTop: $("#gallery").offset().top
+    }, 200);
+}
+
+function contact(){
+	if($('#fb-page').is(":visible"))
+		$('#fb-page').hide(100);
+    $('html, body').animate({
+        scrollTop: $("#contactContent").offset().top
     }, 200);
 }
 
 function instagram(){
 	window.open('http://instagram.com/wangmotorcycles', '_blank');
 }
-
-
-
 
 // tools
 

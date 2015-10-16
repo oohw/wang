@@ -2,10 +2,11 @@
 @import url("../fonts/spartan/stylesheet.css");
 @import url("../fonts/chunk/stylesheet.css");
 
+/*@import url("gallery.css");*/
 
 body {
-	background-color: #f00;
-	overflow-x: hidden;;
+	background-color: #000;
+	overflow-x: hidden;
 	overflow-y: scroll;
 	margin: 0px;
 	padding: 0px;
@@ -35,18 +36,17 @@ body {
 	height: 80px;
 	cursor: pointer;
 	transition: all 0.5s ease-in-out;
-	-webkit-filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) ) brightness( 100% );
-    filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) ) brightness( 100% );
+	-webkit-filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) );
+    filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) );
 }
+
 #menu_logo:hover {
-	-webkit-filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.0) ) brightness( 0% );
-    filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.0) ) brightness( 0% );
+	-webkit-filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.0) );
+    filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.0) );
 }
+
 #menu_logo path{
-	fill:white;
-}
-#menu_logo:hover path{
-	/*fill:black;*/
+	transition: all 0.5s ease-in-out;
 }
 
 #menu {
@@ -92,7 +92,7 @@ body {
 #menu a:hover {
 	/*color: #000000;*/
 	text-decoration: none;
-	color: #000000;
+	color: #ff0000;
 	font-weight: 1200;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.0);
 }
@@ -100,9 +100,9 @@ body {
 #menu a:active {
 }
 
-.fb-page {
-	position: absolute;
-	top: 200px;
+#fb-page {
+	position: fixed;
+	top: 120px;
 	left: 200px;
 	width: 500px;
 	z-index: 3;
@@ -112,24 +112,34 @@ body {
     box-shadow: 4px 4px 14px rgba(0,0,0,0.75);
 }
 
-#contentainer {
-    box-shadow: 4px 4px 14px rgba(0,0,0,0.75);
+#contactContent {
+    /*box-shadow: 4px 4px 14px rgba(0,0,0,0.75);*/
 	font-family: 'Fanwood';
 	position: absolute;
-	color:#000;
-	top: 200px;
+	color:#fff;
+	top: 0px;
 	left:0px;
 	width:600px;
 	z-index:2;
-	background-color: rgba(255,255,255,1);
-	padding:40px;
+	background: #000;/* url("../img/20141215-yamahaengineapart.jpg");
+	background-size: cover;*/
+	padding:0px 0px 0px 0px;
 }
-#contentainer h1 {
+#contactContent h1 {
 	font-family: 'Chunk';
+	font-size: 18px;
 }
-#contentainer p {
-	font-size: 24px;
+#contactContent p {
+	font-size: 18px;
 }
+#contactMap {
+	float: left;
+	margin: 140px 40px 0px 0px;
+}
+#contactText {
+	margin: 140px 0px 0px 0px;
+}
+
 .x {
 	font-family: 'Arial';
 	position: absolute;
@@ -140,4 +150,9 @@ body {
 	background-color: #fff;
 	padding: 3px;
 	z-index:10;
+}
+
+#gallery {
+	position: absolute;
+	padding-top: 140px;
 }

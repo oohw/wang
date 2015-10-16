@@ -4,27 +4,42 @@
         <meta charset="utf-8">
         <meta name="description" content="Wang Motorcycles">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Wang Motorcycles</title>
+        <title>Wang Motorcycles - Motor Reparatie en Onderhoud, Customizing Motors, BMW, Honda</title>
         <link rel="stylesheet" href="css/style.css">
+                <link rel="stylesheet" href="css/gallery.css">
+
         <link rel="author" href="Jakob Schlötter">
     </head>
     <body>
-        <div id="contentainer">
-        	<h1>Welkom bij Wang Motorcycles!</h1>
-        	<p>Wij doen allemaal dingen.<br>
-        	Vooral met motors. Daarnast doen we nog meer dingen.<br>
-        	Deze ook weer met motors.<br>
-        	Zou je vragen hebben (vooral vragen over motors), vraag maar.</p>
-        	<p>Als het over motors gaat, weten we het wel.<br>
-        	En als niet, verzinnen we wat.</p>
-        	<p>Groeten,</p>
-        	<p>W. Motorcycles.</p>
-        </div>
         <script src="js/jquery-2.1.3.js"></script>
         <script src="js/jquery-ui.js"></script>
         <script src="js/jquery.easing.1.3.js"></script>
         <div id="fb-root"></div>
         <script src="js/util.js"></script>
+
+        <div id="contactContent">
+        	<iframe id="contactMap" class="actAsDiv" width="563" height="446" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;q=Pastoorswarande%2050%2C%20Den%20Haag&amp;aq=0&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+        	<div id="contactText">
+	        	<h1>ADRES:</h1>
+	        	<p>
+	        		<b>Wang Motorcycles</b><br>
+					Pastoorswarande 50<br>
+					2513 TZ Den Haag<br>
+					The Netherlands<br>
+					<br>
+					+31 (0) 617 458 725<br>
+					letstalk(at)wangmotorcycles.com<br>
+				</p>
+			</div>
+        </div>
+
+        <div id="gallery">
+        		<div id="imagearea">
+					<div class="clearfix">
+					</div>
+				</div>
+        </div>
+
         <div id="slideshow">
         <?php
 			date_default_timezone_set('Europe/Amsterdam');
@@ -50,10 +65,10 @@
         <div id="fb-page" class="fb-page" data-href="https://www.facebook.com/wangmotorcycles" data-width="500" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/wangmotorcycles"><a href="https://www.facebook.com/wangmotorcycles">Wang Motorcycles</a></blockquote></div></div>
         
         <div id="menu">
-        <a href="javascript:wang()">
+        <a href="javascript:wang()"> <!-- at the time of creating, this way is somehow crossbrowser safer than just implementing an svg-file... -->
 	        <svg version="1.1" id="menu_logo" class="menuitem" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 					 width="333.7px" height="146.6px" viewBox="0 0 333.7 146.6" enable-background="new 0 0 333.7 146.6" xml:space="preserve">
-				<g><path fill="#FF00FF" d="M270.5,57.7c-0.4-12.3-2-26.2-1.6-35.6c0.2-7.7,1.4-11.7,0.7-15.7c-0.6-3.6-6.5-7.4-12.9-6.2
+				<g><path fill="#FFFFFF" d="M270.5,57.7c-0.4-12.3-2-26.2-1.6-35.6c0.2-7.7,1.4-11.7,0.7-15.7c-0.6-3.6-6.5-7.4-12.9-6.2
 					c-1.1,0.2-3,1-3.6,2.1c0.4,2.4,1,6.7,1.2,10.4c-0.6-0.4-1.4-0.5-2.8-0.2c-7.9,1.4-16.3,12.9-17.3,24.7c-4,7.4-8.1,11.8-9.8,12.1
 					c-0.9,0.2-1.5-0.2-1.7-1.3c-0.5-2.5,1.5-10.4,2.6-15.2c1.3-5.3,1.5-9,1-11.7c-0.7-4-3.6-6.6-8.3-5.8c-4.5,0.8-10.7,6.6-15.9,20.8
 					c1.9-5.5,1.9-12.9,1.5-15.4c-0.5-3.1-1.7-4.1-5.1-3.5c-6.3,1.1-13.5,13.4-12.4,19.4c0.3,1.9,0.9,3.9,1.9,5.7
@@ -110,7 +125,7 @@
 			</svg></a>
 	        <div id="menuas">
 				<div class="menuitem dropTheShadow" id="menuGallery"><a href="javascript:gallery()">GALLERY</a></div>
-				<div class="menuitem dropTheShadow" id="menuKontakt"><a href="javascript:gallery()">KONTAKT</a></div>
+				<div class="menuitem dropTheShadow" id="menuKontakt"><a href="javascript:contact()">CONTACT</a></div>
 				<div class="menuitem dropTheShadow" id="menuFacebook"><a href="javascript:facebook()">FACEBOOK</a></div>
 				<div class="menuitem dropTheShadow" id="menuInstagram"><a href="javascript:instagram()">INSTAGRAM</a></div>
 			</div>
@@ -151,6 +166,7 @@
             });
         </script>
         <div id="animator"></div>
+        <script src="js/gallery.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
