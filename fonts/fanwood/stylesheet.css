@@ -8,3 +8,13 @@
     font-weight: regular;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Fanwood';
+    src: url('fanwood_italic-webfont.eot');
+    src: url('fanwood_italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fanwood_italic-webfont.woff') format('woff'),
+         url('fanwood_italic-webfont.ttf') format('truetype'),
+         url('fanwood_italic-webfont.svg#FanwoodTextRegular') format('svg');
+    font-weight: regular;
+    font-style: italic;
+}

@@ -16,12 +16,22 @@ function init(){
 	layoutSlideshow();
 	startSlideshow();
 	layout();
+	$('#fb-page').hide(100);
+	// $('#contentainer').hide(100);
+	$('.x').click(function(){
+		$(this).parent().hide(1000);
+	})
 };
 
 function layout(){
 	width = $(window).outerWidth();
 	height = $(window).outerHeight();
 	$('#menu').center(false,true);
+	$('.fb-page').center(false,true);
+	$('#contentainer').width(width);
+	$('#contentainer').height(height);
+	$('#contentainer').css('top',height+'px');
+	$('#contentainer').center(false,true);
 	// var menuleft = (width - $('#menu').outerWidth())*0.5;
 	// $('#menu').css('left',menuleft+'px');
 	console.log('layouted menu ' +$('#menu').outerWidth());
@@ -36,12 +46,13 @@ function buildMenu(){
 };
 
 function layoutSlideshow(){
-	slideshow_margin = width*0.1;
+	slideshow_margin = Math.round(width*0.1);
 	$('.slideshowImage').css('width',(width+slideshow_margin)+'px');
 	$('.slideshowImage').css('height','auto');
-	$('#slideshow').outerWidth($('.slideshowImage').size()*(width+slideshow_margin));
+	// $('#slideshow').outerWidth($('.slideshowImage').size()*(width+slideshow_margin));
+	$('#slideshow').outerHeight(height);
+	$('#slideshow').outerWidth(width);
 	$('.slideshowImage').each(function(){$(this).css('top',('-' + ($(this).outerHeight()-height)*0.5) + 'px'); });
-	console.log(slideshow_margin + ' = margin');
 };
 
 function gallery(){
@@ -57,7 +68,7 @@ function startSlideshow(){
 	    duration: 4000,
 	    easing: 'linear',
 	    step: function(now,fx) {
-	    	$('#slideshow').css('left',-now);
+	    	$('.slideshowImage').css('left',-now);
 	    },
 	    complete: function(){
 	    	slideshow_left = newleft;
@@ -69,17 +80,33 @@ function startSlideshow(){
 			    duration: 250,
 			    easing: 'easeOutQuad',
 			    step: function(now,fx) {
-			    	$('#slideshow').css('left',-now);
+			    	$('.slideshowImage').css('left',-now);
 			    },
 			    complete: function(){
 	    			slideshow_left = newleft;
 	    			slideshow_left %= (width+slideshow_margin)*($('.slideshowImage').size()-1);
 					startSlideshow();
 			    }
-	});	    }
+			});
+	    }
 	});
 };
 
+function facebook(){
+	if($('#fb-page').is(":visible"))
+		$('#fb-page').hide(100);
+	else
+		$('#fb-page').show(100);
+}
+function wang(){
+    $('html, body').animate({
+        scrollTop: $("#contentainer").offset().top
+    }, 200);
+}
+
+function instagram(){
+	window.open('http://instagram.com/wangmotorcycles', '_blank');
+}
 
 
 
