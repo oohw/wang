@@ -1,10 +1,32 @@
-/* Author: Florian Maul */
-/* Editor: Jakob Schloetter */
 
-var shiftUpSize = 400;
+var width, height, shiftUpSize;
+
+$('#gallery').width(width);
+$('#gallery').height(height);
+// var gallerytop = 140;
+// $('#gallery').css('top',gallerytop + 'px');
+
+$(document).ready(function() {
+	width = $(window).outerWidth();
+	height = $(window).outerHeight();
+
+	shiftUpSize = height * 0.75;
+	
+	$('#menu_logo').mouseover(function(){
+		// $('#menu_logo path').css('fill','red');
+		$('#menu_logoimg').attr("src","../util/wm_logo2red.svg");
+	});
+	$('#menu_logo').mouseout(function(){
+		$('#menu_logoimg').attr("src","../util/wm_logo2.svg");
+		// $('#menu_logo path').css('fill','black');
+	});
+	var bgimageidx = Math.round(Math.random()*5-0.5)+1;
+	var bgurl = '../img/bg/wang_bckgrnd_00' + bgimageidx + '.jpg';
+	console.log("loading background: " + bgurl);
+	$('#body').css('backgroundImage','url("' + bgurl + '")');
+});
 
 var GPlusGallery = (function($) {
-
 	/* ------------ PRIVATE functions ------------ */
 
 	/** Utility function that returns a value or the defaultvalue if the value is null */
@@ -109,6 +131,7 @@ var GPlusGallery = (function($) {
 	var createImageElement = function(parent, item) {
 		var imageContainer = $('<div class="imageContainer"/>');
 		imageContainer.attr('data-shift',0);
+		imageContainer.attr('data-opened',0);
 
 		var overflow = $("<div/>");
 		overflow.css("width", ""+$nz(item.vwidth, 120)+"px");
@@ -117,19 +140,26 @@ var GPlusGallery = (function($) {
 
 		var link = $('<a class="viewImageAction" href="#"/>');
 		link.click(function() {
-			openUp($(this));
+			console.log($(this).parent().parent().attr('data-opened'));
+			if($(this).parent().parent().attr('data-opened') === '0'){ // i hate you javascript
+				$('imageContainer').attr('data-opened',0); 
+				openUp($(this));
+			} else {
+				closeDown($(this));
+			}
 			return false;
 		});
 		
 		var img = $("<img/>");
-		img.attr("src", "gallery/thumbs/" + item.thumbUrl + ".png");
+		img.attr("class", "imageItself");
+		img.attr("src", "gallery/thumbs/" + item.thumbUrl);
 		img.attr("title", item.title);
 		img.attr("alt", item.alt);
 		img.attr("data-description", item.description);
 		img.css("width", "" + $nz(item.twidth, 120) + "px");
 		img.css("height", "" + $nz(item.theight, 120) + "px");
 		img.css("margin-left", "" + (item.vx ? (-item.vx) : 0) + "px");
-		img.css("margin-top", "" + 0 + "px");
+		img.css("margin-top", "" + 3 + "px");
 		img.hide();
 
 		link.append(img);
@@ -137,8 +167,8 @@ var GPlusGallery = (function($) {
 		imageContainer.append(overflow);
 
 		// fade in the image after load
-		img.bind("load", function () { 
-			$(this).fadeIn(500); 
+		img.bind("load", function () {
+				$(this).show(0);
 		});
 
 		parent.find(".clearfix").before(imageContainer);
@@ -157,7 +187,7 @@ var GPlusGallery = (function($) {
 		overflow.css("height", "" + $nz(item.theight, 120) + "px");
 
 		img.css("margin-left", "" + (item.vx ? (-item.vx) : 0) + "px");
-		img.css("margin-top", "" + 0 + "px");
+		img.css("margin-top", "" + 3 + "px");
 	};	
 		
 	/* ------------ PUBLIC functions ------------ */
@@ -168,15 +198,22 @@ var GPlusGallery = (function($) {
 			// reduce width by 1px due to layout problem in IE
 			var containerWidth = imageContainer.width() - 1;
 			
-			// Make a copy of the array
+			// // Make a copy of the array
 			var items = realItems.slice();
 		
 			// calculate rows of images which each row fitting into
 			// the specified windowWidth.
 			var rows = [];
-			while(items.length > 0) {
+			var stop = 0;
+			while(items.length > 0){
+				console.log(items[0].width + " : " + containerWidth);
+				// var row = [];
+				// row.push(buildImageRow(containerWidth, items));
+				// console.log(row.length);
 				rows.push(buildImageRow(containerWidth, items));
-			}  
+				// stop = 1
+			};
+
 
 			for(var r in rows) {
 				for(var i in rows[r]) {
@@ -196,23 +233,57 @@ var GPlusGallery = (function($) {
 })(jQuery);
 
 function openUp(item){
+	// $('.contentainer').remove();
+	var parpar = item.parent().parent();
+	var parparpar = item.parent().parent().parent();
+	$(parpar).attr('data-opened',1);
+	var contentainer = $('#'+$(parparpar).attr('id') + '_contentainer');
+	$(contentainer).show(400).css("display", "inline-block");
+	var newurl = $(item).children('.imageItself').attr('src').replace('/thumbs/','/previews/');
+	$(contentainer).children('.contentainerImg').attr('src',newurl);
+	// var rowTop = item.offset().top;
+	// // console.log("FROM TOP " + $('#imagearea').children().length);
+	// $('.imagearea').children().each(function(){
+	// 	if($(this).attr('class') !== 'clearfix'){
+	// 		if( $(this).offset().top > rowTop ){
+	// 			if($(this).attr('data-shift') <= 0){
+	// 				shiftTo($(this),$(this).offset().top,shiftUpSize);
+	// 			}
+	// 		} else {
+	// 			if($(this).attr('data-shift') > 0){
+	// 				shiftTo($(this),$(this).offset().top,0);
+	// 			}
+	// 		}
+	// 	};
+	// });
+
+	if(parpar.attr('data-shift') <= 0){
+	    $('html, body').animate({
+	        scrollTop: (parpar.offset().top + (parpar.outerHeight()-140))
+	    }, 200);
+	} else {
+	    $('html, body').animate({
+	        scrollTop: (parpar.offset().top + (parpar.outerHeight()-140) - shiftUpSize)
+	    }, 200);
+	}
+
+	// console.log(item.children().first().attr('data-description'));
+}
+
+function closeDown(item){
+	var parpar = item.parent().parent();
+	var parparpar = item.parent().parent().parent();
+	$(parparpar.children()).attr('data-opened',0);
+	$('#'+$(parparpar).attr('id') + '_contentainer').hide(400);
+
 	var rowTop = item.offset().top;
 	// console.log("FROM TOP " + $('#imagearea').children().length);
-	$('#imagearea').children().each(function(){
+	$('.imagearea').children().each(function(){
 		if($(this).attr('class') !== 'clearfix'){
-			if( $(this).offset().top > rowTop ){
-				if($(this).attr('data-shift') <= 0){
-					shiftTo($(this),$(this).offset().top,shiftUpSize);
-				}
-			} else {
-				if($(this).attr('data-shift') > 0){
-					shiftTo($(this),$(this).offset().top,0);
-				}
-			}
+			shiftTo($(this),$(this).offset().top,0);
 		};
 	});
 
-	var parpar = item.parent().parent();
 	if(parpar.attr('data-shift') <= 0){
 	    $('html, body').animate({
 	        scrollTop: (parpar.offset().top + (parpar.outerHeight()-140))
@@ -241,14 +312,46 @@ function shiftTo(item, start, shift){
 }
 
 $(document).ready(function() {
-	$.getJSON('gallery/images.json', function(data) {
-		var items = data.thumbs;
-		
-		GPlusGallery.showImages($("#imagearea"), items);
-				
+	$.getJSON('../gallery/test.json', function(data) {
+
+		for ( var i = 0; i < data.thumbs.length; i++){
+			$('#gallery').append('<div id="imagearea' + i + '" class="imagearea"><div class="clearfix"></div></div>');
+		}
+
+		$(".imagearea").width($('#body').outerWidth()*0.6);
+		// $(".imagearea").height($('#body').outerHeight()*0.8);
+
+		for ( var i = 0; i < data.thumbs.length; i++){
+			var items = data.thumbs[i].images;
+			GPlusGallery.showImages($("#imagearea"+i), items);
+			var contentainer = $('<div id="imagearea'+i+'_contentainer" class="contentainer"></div>');
+			contentainer.append('<img class="contentainerImg" height="' + (height*0.75-40) + '" src="../gallery/previews/' + data.thumbs[i].images[0].thumbUrl + '" >');
+			contentainer.append('<div class="contentainerText"><p>(NL)</p><h1>' + data.thumbs[i].title + '</h1><p>' + data.thumbs[i].description + '</p><br><p>(EN)</p><h1>' + data.thumbs[i].title_en + '</h1><p>' + data.thumbs[i].description_en + '</p></div>');
+			$("#imagearea"+i).append(contentainer);
+		}
+		$('.contentainer').show(0);
+		$('.contentainer').height(height*0.75);
+		$('.contentainer').width(width*0.6);
+		$('.contentainer').hide(0);
+
 		$(window).resize(function() {
+			width = $(window).outerWidth();
+			height = $(window).outerHeight();
+			$('.contentainer').show(0);
+			$('.contentainer').height(height*0.75);
+			$('.contentainer').width(width*0.6);
+			$('.contentainerImg').height(height*0.75-40);
+			$('.contentainer').hide(0);
+
+			shiftUpSize = height * 0.75;
+			$(".imagearea").width(width*0.6);
 			// layout the images with new width
-			GPlusGallery.showImages($("#imagearea"), items);
+			// GPlusGallery.showImages($("#imagearea"), items);
+
+			for ( var i = 0; i < data.thumbs.length; i++){
+				var items = data.thumbs[i].images;
+				GPlusGallery.showImages($("#imagearea"+i), items);
+			}
 		});  
 
 		

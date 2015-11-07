@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Cinetype';
+    src: url('GT-Cinetype-Mono.eot');
+    src: url('GT-Cinetype-Mono.eot?#iefix') format('embedded-opentype'),
+         url('GT-Cinetype-Mono.woff') format('woff'),
+         url('GT-Cinetype-Mono.ttf') format('truetype'),
+         url('GT-Cinetype-Mono.svg#SourceCodePro-Black') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

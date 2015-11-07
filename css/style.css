@@ -1,11 +1,15 @@
 @import url("../fonts/fanwood/stylesheet.css");
 @import url("../fonts/spartan/stylesheet.css");
 @import url("../fonts/chunk/stylesheet.css");
+@import url("../fonts/GT-Cinetype-Mono-web/stylesheet.css");
 
 /*@import url("gallery.css");*/
 
 body {
-	background-color: #000;
+	/*background-image: url("../img/bg/wang_bckgrnd_001.jpg");*/
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	margin: 0px;
@@ -13,7 +17,7 @@ body {
 }
 
 #slideshow {
-	position:absolute;
+	position:fixed;
 	top:0px;
 	left:0px;
 	overflow: hidden;
@@ -22,137 +26,190 @@ body {
 	margin: 0px;
    	font-size: 0;
    	display: inline-block;
+   	z-index: 12;
+   	pointer-events: none;
 }
 
 .slideshowImage {
-	position:relative;
+	position:absolute;
 	float:none;
 	border: none;
 	padding: 0px;
 	margin: 0px;
+   	pointer-events: auto;
+}
+
+.menuitem {
+	pointer-events: auto;
+	position: absolute;
+	cursor: pointer;
+	/*background-color: #f0f;*/
+}
+
+#menu_logo svg {
+	height: 80px;
+	width: 160px;
+	cursor: pointer;
+	transition: all 0.5s ease-in-out;
 }
 
 #menu_logo {
-	height: 80px;
-	cursor: pointer;
-	transition: all 0.5s ease-in-out;
-	-webkit-filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) );
-    filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.75) );
+	position: absolute;
+	top:20px;
+	left:20px;
 }
 
-#menu_logo:hover {
-	-webkit-filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.0) );
-    filter: drop-shadow( 4px 4px 14px rgba(0,0,0,0.0) );
+#menu_logo svg path{
+	transition: all 0.5s ease-in-out;
 }
 
-#menu_logo path{
-	transition: all 0.5s ease-in-out;
+#menuGallery {
+	position: absolute;
+	bottom:20px;
+	left:20px;
+}
+#menuFacebook {
+	position: absolute;
+	top:20px;
+	right:20px;
+}
+#menuInstagram {
+	bottom:20px;
+	right:20px;
 }
 
 #menu {
 	position: fixed;
-	top:20px;
-	z-index: 5;
-}
-#menuas {
-	position: relative;
-	top:30px;
-	float: left;
-}
-
-.menuitem {
-    float: left;
-	transform-origin: 50% 50%;
-	transition: all 0.2s ease-in-out;
-	/*transform: scale(1.0);
-	-webkit-transform: scale(1.0);*/
+	top: 0px;
+	left: 0px;
+	z-index: 2147483646;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
 }
 
-.menuitem:hover {
-	/*transform: scale(1.1);
-	-webkit-transform: scale(1.1);*/
-}
 
 #menu a {
 	position: relative;
-	font-size: 28px;
-	font-family: 'Chunk';
+	font-size: 2em;
+	font-family: 'Cinetype';
 	/*font-weight: bold;*/
 	transition: all 0.4s ease-in-out;
 	text-decoration: none;
 	padding: 0px 0px 0px 20px;
+	text-transform: uppercase;
 }
 
 #menu a:link, #menu a:visited {
-    color: #FFFFFF;
+    color: #000000;
 	font-weight: 900;
-    text-shadow: 4px 4px 14px rgba(0,0,0,0.75);
+    text-shadow: 4px 4px 14px rgba(1,1,1,0.75);
 }
 
 #menu a:hover {
-	/*color: #000000;*/
+	/*color: #fff000;*/
 	text-decoration: none;
 	color: #ff0000;
 	font-weight: 1200;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.0);
+    text-shadow: 2px 2px 4px rgba(1,1,1,0.0);
 }
 
-#menu a:active {
+#content {
+	font-family: 'Cinetype';
+	position: absolute;
+	color:#000;
+	z-index:10;
+	padding:0px 0px 0px 0px;
+	text-align: center;
+	text-transform: uppercase;
+}
+#content h1 {
+	font-family: 'Cinetype';
+	font-size: 4em;
+	text-transform: uppercase;
+}
+#content p {
+	font-size: 2em;
+	text-align: left;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 }
 
-#fb-page {
-	position: fixed;
-	top: 120px;
-	left: 200px;
-	width: 500px;
-	z-index: 3;
-	background-color: #FFFFFF;
-    -webkit-box-shadow: 4px 4px 14px rgba(0,0,0,0.75);
-    -moz-box-shadow: 4px 4px 14px rgba(0,0,0,0.75);
-    box-shadow: 4px 4px 14px rgba(0,0,0,0.75);
+.contact{
+	font-size: 2em !important;
+}
+td {
+	padding: 3em;
+	width: 30%;
+	vertical-align: top;
 }
 
 #contactContent {
     /*box-shadow: 4px 4px 14px rgba(0,0,0,0.75);*/
-	font-family: 'Fanwood';
+	font-family: 'Cinetype';
+	text-transform: uppercase;
 	position: absolute;
-	color:#fff;
+	color:#000;
 	top: 0px;
 	left:0px;
 	width:600px;
 	z-index:2;
-	background: #000;/* url("../img/20141215-yamahaengineapart.jpg");
+	/*background: #fff; url("../img/20141215-yamahaengineapart.jpg");
 	background-size: cover;*/
 	padding:0px 0px 0px 0px;
 }
 #contactContent h1 {
-	font-family: 'Chunk';
-	font-size: 18px;
+	font-family: 'Cinetype';
+	text-transform: uppercase;
+	font-size: 2em;
+	font-weight: normal !important;
 }
 #contactContent p {
-	font-size: 18px;
+	font-size: 2em;
 }
 #contactMap {
+	position: relative;
 	float: left;
-	margin: 140px 40px 0px 0px;
+	margin: 1em 0px 0px 0px;
+	-webkit-filter: saturate(0);
+	z-index:1 !important;
 }
 #contactText {
 	margin: 140px 0px 0px 0px;
 }
 
-.x {
-	font-family: 'Arial';
-	position: absolute;
-	font-size: 24px;
-	top:5px;
-	right:15px;
-	cursor: pointer;
-	background-color: #fff;
-	padding: 3px;
-	z-index:10;
-}
-
 #gallery {
 	position: absolute;
 	padding-top: 140px;
+	padding-bottom: 140px;
+	text-align: center;
+}
+
+.imagearea {
+	float: center;
+    display: inline-block;
+}
+
+.contentainer {
+	display: none;
+	float: center;
+	margin:0px;
+	padding:0px;
+}
+.contentainerImg {
+	float: left;
+	padding: 2em;
+}
+.contentainerText {
+	font-family: 'Cinetype';
+	text-transform: uppercase;
+	font-size: 1em;
+	font-weight: normal !important;
+	padding: 2em;
+}
+.contentainerText h1 {
+	font-size: 1em;
+}
+.contentainerText p {
+	font-size: 1em;
 }

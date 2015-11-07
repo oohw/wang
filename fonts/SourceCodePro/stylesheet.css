@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'SCP';
+    src: url('EOT/SourceCodePro-Black.eot');
+    src: url('SVG/SourceCodePro-Black.eot?#iefix') format('embedded-opentype'),
+         url('WOFF/OTF/SourceCodePro-Black.otf.woff') format('woff'),
+         url('WOFF/TTF/SourceCodePro-Black.otf.ttf') format('truetype'),
+         url('SVG/SourceCodePro-Black.svg#SourceCodePro-Black') format('svg');
+    font-weight: black;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SCP';
+    src: url('EOT/SourceCodePro-Bold.eot');
+    src: url('SVG/SourceCodePro-Bold.eot?#iefix') format('embedded-opentype'),
+         url('WOFF/OTF/SourceCodePro-Bold.otf.woff') format('woff'),
+         url('WOFF/TTF/SourceCodePro-Bold.otf.ttf') format('truetype'),
+         url('SVG/SourceCodePro-Bold.svg#SourceCodePro-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SCP';
+    src: url('EOT/SourceCodePro-Regular.eot');
+    src: url('SVG/SourceCodePro-Regular.eot?#iefix') format('embedded-opentype'),
+         url('WOFF/OTF/SourceCodePro-Regular.otf.woff') format('woff'),
+         url('WOFF/TTF/SourceCodePro-Regular.otf.ttf') format('truetype'),
+         url('SVG/SourceCodePro-Regular.svg#SourceCodePro-Regular') format('svg');
+    font-weight: regular;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'SCP';
+    src: url('EOT/SourceCodePro-Semibold.eot');
+    src: url('SVG/SourceCodePro-Semibold.eot?#iefix') format('embedded-opentype'),
+         url('WOFF/OTF/SourceCodePro-Semibold.otf.woff') format('woff'),
+         url('WOFF/TTF/SourceCodePro-Semibold.otf.ttf') format('truetype'),
+         url('SVG/SourceCodePro-Semibold.svg#SourceCodePro-Semibold') format('svg');
+    font-weight: semibold;
+    font-style: normal;
+}

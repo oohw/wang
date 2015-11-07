@@ -1,0 +1,44 @@
+@import url("../fonts/SourceCodePro/stylesheet.css");
+
+body {
+	font-family: 'SCP';
+	font-weight: bold;
+	background-color: #ffffee;
+	color: #101010;
+}
+
+#uploadbody {
+	background-color: #ffffee;
+    /*background-image: url('../util/thumbs4.png');*/
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+}
+
+h1 {
+	color: #ffffee;
+	background-color: #faa;
+}
+p {
+	margin: 0px;
+	padding: 0px;
+	font-size: 13px;
+}
+
+form {
+	position: absolute;
+	padding: 20px;
+	border: 1px solid #faa;
+
+    -webkit-box-shadow: 4px 4px 24px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 24px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 24px rgba(0,0,0,0.75);
+}
+
+.nl {
+	color: #000;
+	background-color: #eeeeff;
+}
+.en {
+	background-color: #ffeeee;
+}

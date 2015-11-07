@@ -1,148 +1,155 @@
 var width, height, slideshow, gallery;
-
+var slideshowloop = true;
 var slideshow_margin = 0;
 $(document).ready(function() {
-	width = $(window).outerWidth();
-	height = $(window).outerHeight();
-	init();
+    width = $(window).outerWidth();
+    height = $(window).outerHeight();
+    var bgimageidx = Math.round(Math.random()*5-0.5)+1;
+    var bgurl = '../img/bg/wang_bckgrnd_00' + bgimageidx + '.jpg';
+    console.log("loading background: " + bgurl);
+    $('#body').css('backgroundImage','url("' + bgurl + '")');
+    init();
 });
 
-$( window ).resize(function() {
-	layout();
+$(window).resize(function() {
+    layout();
+    layoutSlideshow();
 });
 
-function init(){
-	buildMenu();
-	layoutSlideshow();
-	startSlideshow();
-	layout();
-	$('#fb-page').hide(100);
-	// $('#contactContent').hide(100);
-	$('.x').click(function(){
-		$(this).parent().hide(1000);
-	})
+function init() {
+    layoutSlideshow();
+    startSlideshow();
+    layout();
 	$('#menu_logo').mouseover(function(){
-		console.log("OVER LOGO");
-		$('#menu_logo path').css('fill','red');
+		// $('#menu_logo path').css('fill','red');
+		$('#menu_logoimg').attr("src","../util/wm_logo2red.svg");
 	});
 	$('#menu_logo').mouseout(function(){
-		console.log("OVER LOGO");
-		$('#menu_logo path').css('fill','white');
+		$('#menu_logoimg').attr("src","../util/wm_logo2.svg");
+		// $('#menu_logo path').css('fill','black');
 	});
+   	$('#email').mouseover(function(event) {
+   		var mail1 = 'letstalk';
+   		var tada = 'wangmotorcycles.com';
+   		$(this).html('<span style="font-size:0.5em;pointer-events:none">' + mail1 + '@' + tada + '</span>');
+        slideshowloop = false;
+   	});
+   	$('#email').mouseout(function(event) {
+   		$(this).html('e-mail');
+        slideshowloop = true;
+        var current = $('.slideshowImage').get(slideshowIndex);
+        var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
+        setTimeout(function() {
+            if (!slideshowactive) {
+                animateLoop(current, goLeft);
+            }
+        }, 0);
+   	});
+    $('#contactMap').mouseover(function() {
+        slideshowloop = false;
+    });
+    $('#contactMap').mouseout(function() {
+        slideshowloop = true;
+        var current = $('.slideshowImage').get(slideshowIndex);
+        var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
+        setTimeout(function() {
+            if (!slideshowactive) {
+                animateLoop(current, goLeft);
+            }
+        }, 0);
+    });
 };
 
-function layout(){
-	width = $(window).outerWidth();
-	height = $(window).outerHeight();
-	$('#menu').center(false,true);
-	$('.fb-page').center(false,true);
-	$('#contactContent').width(width);
-	$('#contactContent').height(height);
-	$('#contactContent').offset({top : (height) });
-	$('#contactContent').css('padding-left',(width - ($('#contactMap').outerWidth()+500))+'px');
-	$('#gallery').width(width);
-	$('#gallery').height(height);
-	var gallerytop = $('#contactContent').offset().top + Math.max($('#contactContent').outerHeight(),$('#contactMap').outerHeight()+140);
-	$('#gallery').css('top',gallerytop + 'px');
+function layout() {
+    width = $(window).outerWidth();
+    height = $(window).outerHeight();
+    $('#content').center(true, true);
 };
 
-function buildMenu(){
-	$('.class').each(function(){
-		$(this).outerWidth( $($(this).children()[0]).outerWidth()  );
-		console.log( $($(this).children()[0]).outerWidth() );
-	});
-	console.log('built menu');
-};
-
-function layoutSlideshow(){
-	slideshow_margin = Math.round(width*0.1);
-	$('.slideshowImage').css('width',(width+slideshow_margin)+'px');
-	$('.slideshowImage').css('height','auto');
-	// $('#slideshow').outerWidth($('.slideshowImage').size()*(width+slideshow_margin));
-	$('#slideshow').outerHeight(height);
-	$('#slideshow').outerWidth(width);
-	$('.slideshowImage').each(function(){$(this).css('top',('-' + ($(this).outerHeight()-height)*0.5) + 'px'); });
-};
-
-function gallery(){
-	console.log("shityo");
+function layoutSlideshow() {
+    slideshow_margin = Math.round(width * 0.1);
+    $('.slideshowImage').css('height', (height - 200) + 'px');
+    $('.slideshowImage').css('width', 'auto');
+    $('#slideshow').outerHeight(height);
+    $('#slideshow').outerWidth(width);
+    $('.slideshowImage').each(function() {
+        var top = (height - $(this).outerHeight()) * 0.5;
+        $(this).css('top', top + 'px');
+    });
+    $('.slideshowImage').css('left', (slideshow_margin + width) + "px");
 };
 
 var slideshow_left = 0;
-function startSlideshow(){
-	// $('#slideshow').css('transition', 'all 5s linear');
-	// $('#slideshow').css('left', '-100px');
-	var newleft = slideshow_left+slideshow_margin;
-	$("#animator").css('font-size', slideshow_left).animate({ fontSize: newleft }, {
-	    duration: 4000,
-	    easing: 'linear',
-	    step: function(now,fx) {
-	    	$('.slideshowImage').css('left',-now);
-	    },
-	    complete: function(){
-	    	slideshow_left = newleft;
-	    	newleft += width;
-	    	newleft %= (width+slideshow_margin)*$('.slideshowImage').size();
-			// $('#slideshow').css('transition', 'all 1s linear');
-			// $('#slideshow').css('left', '0px');
-	    	$("#animator").css('font-size', slideshow_left).animate({ fontSize: newleft }, {
-			    duration: 250,
-			    easing: 'easeOutQuad',
-			    step: function(now,fx) {
-			    	$('.slideshowImage').css('left',-now);
-			    },
-			    complete: function(){
-	    			slideshow_left = newleft;
-	    			slideshow_left %= (width+slideshow_margin)*($('.slideshowImage').size()-1);
-					startSlideshow();
-			    }
-			});
-	    }
-	});
+var slideshowIndex = 0;
+var slideshowactive = false;
+
+function startSlideshow() {
+    var current = $('.slideshowImage').get(slideshowIndex);
+    var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
+    animateLoop(current, goLeft);
 };
 
-function facebook(){
-	if($('#fb-page').is(":visible"))
-		$('#fb-page').hide(100);
-	else
-		$('#fb-page').show(100);
-}
-function wang(){
-	if($('#fb-page').is(":visible"))
-		$('#fb-page').hide(100);
-    $('html, body').animate({
-        scrollTop: 0
-    }, 200);
-}
-function gallery(){
-	if($('#fb-page').is(":visible"))
-		$('#fb-page').hide(100);
-    $('html, body').animate({
-        scrollTop: $("#gallery").offset().top
-    }, 200);
-}
+function animateLoop(object, goal) {
+    slideshowactive = true;
+    $("#animator").css('font-size', width).animate({
+        fontSize: goal
+    }, {
+        duration: 800,
+        easing: 'swing',
+        step: function(now, fx) {
+            $(object).css('left', now);
+        },
+        complete: function() {
+            $("#animator").css('font-size', $(object).offset().left).animate({
+                fontSize: goal - slideshow_margin * 2
+            }, {
+                duration: 4000,
+                easing: 'linear',
+                step: function(now, fx) {
+                    $(object).css('left', now);
+                },
+                complete: function() {
+                    $("#animator").css('font-size', $(object).offset().left).animate({
+                        fontSize: -$(object).outerWidth()
+                    }, {
+                        duration: 600,
+                        easing: 'easeOutExpo',
+                        step: function(now, fx) {
+                            $(object).css('left', now);
+                        },
+                        complete: function() {
+                            $('.slideshowImage').css('left', (width) + "px");
+                            slideshowIndex++;
+                            slideshowIndex %= $('.slideshowImage').size();
+                            var current = $('.slideshowImage').get(slideshowIndex);
+                            var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
+                            if (slideshowloop) {
+                                console.log("start slideshow");
+                                setTimeout(function() {
+                                    animateLoop(current, goLeft);
+                                }, 2000);
+                            } else {
+                                console.log("not start slideshow");
+                                slideshowactive = false;
+                            }
 
-function contact(){
-	if($('#fb-page').is(":visible"))
-		$('#fb-page').hide(100);
-    $('html, body').animate({
-        scrollTop: $("#contactContent").offset().top
-    }, 200);
-}
-
-function instagram(){
-	window.open('http://instagram.com/wangmotorcycles', '_blank');
+                        }
+                    });
+                }
+            });
+        }
+    });
 }
 
 // tools
 
-jQuery.fn.center = function (doTop, doLeft) {
+jQuery.fn.center = function(doTop, doLeft) {
     // this.css("position","absolute");
-    if(doTop)
-    	this.css("top", Math.max(0, (($(window).outerHeight() - $(this).outerHeight()) / 2) + 
-                                                $(window).scrollTop()) + "px");
-	if(doLeft)
-    	this.css("left", Math.max(0, (($(window).outerWidth() - $(this).outerWidth()) / 2) + 
-                                                $(window).scrollLeft()) + "px");
+    if (doTop)
+        this.css("top", Math.max(0, (($(window).outerHeight() - $(this).outerHeight()) / 2) +
+            $(window).scrollTop()) + "px");
+    if (doLeft)
+        this.css("left", Math.max(0, (($(window).outerWidth() - $(this).outerWidth()) / 2) +
+            $(window).scrollLeft()) + "px");
     return this;
 }
