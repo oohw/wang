@@ -50,10 +50,10 @@ function init() {
             }
         }, 0);
    	});
-    $('.content_text').mouseover(function() {
+    $('.contact').mouseover(function() {
         slideshowloop = false;
     });
-    $('.content_text').mouseout(function() {
+    $('.contact').mouseout(function() {
         slideshowloop = true;
         var current = $('.slideshowImage').get(slideshowIndex);
         var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
@@ -62,6 +62,12 @@ function init() {
                 animateLoop(current, goLeft);
             }
         }, 2000);
+    });
+    $('#contactMap').mouseover(function() {
+        $(this).css('-webkit-filter','saturate(1)');
+    });
+    $('#contactMap').mouseout(function() {
+        $(this).css('-webkit-filter','saturate(0)');
     });
 };
 
