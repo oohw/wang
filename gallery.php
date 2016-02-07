@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="description" content="Wang Motorcycles">
+        <meta http-equiv="Content-Language" content="en,nl">
+        <meta name="description" content="Wang Motorcycles verzorgt onderhoud, reparatie, restauratie en clean customising aan BMW, Harley, Honda, Yamaha, Suzuki, Kawasaki, Buell, Triumph, BSA en nog veel meer motors in Den Haag.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Wang Motorcycles - Motor Reparatie en Onderhoud, Customizing Motors, BMW, Honda</title>
+        <title>Wang Motorcycles - Motor Reparatie en Onderhoud, Customizing Motors, BMW, Honda in Den Haag</title>
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/gallery.css">
         <link rel="author" href="Jakob Schlötter">

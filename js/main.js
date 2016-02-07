@@ -8,6 +8,7 @@ $(document).ready(function() {
     var bgurl = '../img/bg/wang_bckgrnd_00' + bgimageidx + '.jpg';
     console.log("loading background: " + bgurl);
     $('#body').css('backgroundImage','url("' + bgurl + '")');
+    // $('#body').css('backgroundImage','url("../img/bg/bg.jpg")');
     init();
 });
 
@@ -17,6 +18,10 @@ $(window).resize(function() {
 });
 
 function init() {
+    setTimeout(function() {
+        layout();
+    }, 200);
+
     layoutSlideshow();
     startSlideshow();
     layout();
@@ -60,15 +65,66 @@ function init() {
     });
 };
 
+
 function layout() {
     width = $(window).outerWidth();
     height = $(window).outerHeight();
-    $('#content').center(true, true);
+
+    changeContentHeight();
+    var menuFontsizeH = height*0.03 > 12 ? height*0.03 > 20 ? 20 : height*0.03 : 12;
+    var menuFontsizeW = width*0.03 > 12 ? width*0.03 > 20 ? 20 : width*0.03 : 12;
+    var menuFontsize = menuFontsizeH < menuFontsizeW ? menuFontsizeH : menuFontsizeW;
+    $('.menuitem').css('fontSize',menuFontsize+'px');
+
+    // var fontratio = $('#content').outerHeight()/$('#contenttext_nl').outerHeight();
+    // var newFontHeight = fontratio * parseFloat($('#content p').css('fontSize').replace('em',''));
+    // $('#content p').css('fontSize',menuFontsize+'px');
+    // $('#contactContent p').css('fontSize',menuFontsize+'px');
+    // $('#contactContent h1').css('fontSize',menuFontsize+'px');
 };
 
+function changeContentHeight(){
+    if(width < height){
+        var contentStart = $('#menu_logoimg').offset().top + $('#menu_logoimg').outerHeight();
+        var contentEnd = height-$('#menuGallery').offset().top;
+        var contentmarg = contentStart > contentEnd ? contentStart*2 : contentEnd*2;
+        $('#content').height((height-(contentmarg))*2);
+        $('#content').offset({top: contentStart + 'px'});
+        $('.content_text').width((width/2)-40);
+        // $('#content').center(true, true);
+    } else {
+        var contentStart = $('#menu_logoimg').offset().top + $('#menu_logoimg').outerHeight();
+        var contentEnd = height-$('#menuGallery').offset().top;
+        var contentmarg = contentStart > contentEnd ? contentStart*2 : contentEnd*2;
+        $('#content').height(height-(contentmarg));
+        $('#content').center(true, true);
+        $('.content_text').width((width/3)-40);
+    }
+    if ( 240 > $($('.content_text')[2]).outerWidth() ){
+        $('#maps').width($($('.content_text')[2]).outerWidth());
+    } else {
+        $('#maps').width(240);
+    }
+        console.log( $($('.content_text')[2]).outerWidth() );
+}
+
+
 function layoutSlideshow() {
+    // stop current slideshow
+    // var current = $('.slideshowImage').get(slideshowIndex);
+    // var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
+    // $(current).css('left', goLeft);
+    // slideshowactive = false;
+    // $('#animator').stop(true,true).css('font-size', 0.0).animate({
+    //     fontSize: 1.0
+    // }, {
+    //     duarion: 500,
+    //     complete: function(){
+    //         slideshowactive = true;
+    //     }
+    // });
     slideshow_margin = Math.round(width * 0.1);
-    $('.slideshowImage').css('height', (height - 200) + 'px');
+    $('.slideshowImage').css('height', (height - height*0.0) + 'px');
     $('.slideshowImage').css('width', 'auto');
     $('#slideshow').outerHeight(height);
     $('#slideshow').outerWidth(width);
@@ -124,12 +180,12 @@ function animateLoop(object, goal) {
                             var current = $('.slideshowImage').get(slideshowIndex);
                             var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
                             if (slideshowloop) {
-                                console.log("start slideshow");
+                                // console.log("start slideshow");
                                 setTimeout(function() {
                                     animateLoop(current, goLeft);
                                 }, 2000);
                             } else {
-                                console.log("not start slideshow");
+                                // console.log("not start slideshow");
                                 slideshowactive = false;
                             }
 

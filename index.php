@@ -3,33 +3,33 @@
 	// prepare image.json 
 	date_default_timezone_set('Europe/Amsterdam');
 
-	$imgpath = 'gallery/img';
-	$imgfiles = scandir($imgpath);
-	$galleryimages = Array();
-	$i = 0;
-	foreach ($imgfiles as $key => $value) {
-		$extension = pathinfo($value, PATHINFO_EXTENSION);
-		if( $extension == 'png' || $extension == 'jpg' ) {
-			$galleryimage = Array();
-			$galleryimage["thumbUrl"]=$value;
-		    $galleryimage["title"]="this is a title";
-		    $galleryimage["theight"]=120;
-		    $galleryimage["description"]="first image ever";
-		    $galleryimage["author"]="ME";
-		    $galleryimage["name"]=$value;
-		    $galleryimage["twidth"]=120 * getimagesize($imgpath.'/'.$value)[1] / getimagesize($imgpath.'/'.$value)[0];
-		    $galleryimage["alt"]="yo";
-			$galleryimages[] = $galleryimage;
-			// $imagick = new Imagick(realpath($imgpath.'/'.$value));
+	// $imgpath = 'gallery/img';
+	// $imgfiles = scandir($imgpath);
+	// $galleryimages = Array();
+	// $i = 0;
+	// foreach ($imgfiles as $key => $value) {
+	// 	$extension = pathinfo($value, PATHINFO_EXTENSION);
+	// 	if( $extension == 'png' || $extension == 'jpg' ) {
+	// 		$galleryimage = Array();
+	// 		$galleryimage["thumbUrl"]=$value;
+	// 	    $galleryimage["title"]="this is a title";
+	// 	    $galleryimage["theight"]=120;
+	// 	    $galleryimage["description"]="first image ever";
+	// 	    $galleryimage["author"]="ME";
+	// 	    $galleryimage["name"]=$value;
+	// 	    $galleryimage["twidth"]=120 * getimagesize($imgpath.'/'.$value)[1] / getimagesize($imgpath.'/'.$value)[0];
+	// 	    $galleryimage["alt"]="yo";
+	// 		$galleryimages[] = $galleryimage;
+	// 		// $imagick = new Imagick(realpath($imgpath.'/'.$value));
 
-		} else if( $extension == 'json' ) {
+	// 	} else if( $extension == 'json' ) {
 
-		}
+	// 	}
 
-	}
-	$thumbs = Array();
-	$thumbs["thumbs"] = $galleryimages;
-	file_put_contents('gallery/images.json', json_encode($thumbs));
+	// }
+	// $thumbs = Array();
+	// $thumbs["thumbs"] = $galleryimages;
+	// file_put_contents('gallery/images.json', json_encode($thumbs));
 
 
 
@@ -37,7 +37,8 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta name="description" content="Wang Motorcycles">
+        <meta http-equiv="Content-Language" content="en,nl">
+        <meta name="description" content="Wang Motorcycles verzorgt onderhoud, reparatie, restauratie en clean customising aan BMW, Harley, Honda, Yamaha, Suzuki, Kawasaki, Buell, Triumph, BSA en nog veel meer motors in Den Haag.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Wang Motorcycles - Motor Reparatie en Onderhoud, Customizing Motors, BMW, Honda</title>
         <link rel="stylesheet" href="css/style.css">
@@ -49,6 +50,7 @@
         <script src="js/jquery-ui.js"></script>
         <script src="js/jquery.easing.1.3.js"></script>
         <script src="js/util.js"></script>
+        <script src="js/flowtype.js"></script>
 
         <div id="slideshow">
         <?php
@@ -84,31 +86,23 @@
 
         <div id="content">
         	<!-- <h1>Wang Motorcycles</h1> -->
-        	<table>
-        		<tbody>
-        			<tr>
-        				<td><p lang="nl" class="nl">(nl)<br>reparatie, onderhoud, restauratie en ombouw van motorfietsen.</p><p>Voor onderwets vakmanschap en prijzen.</p><p>En niet geheel onbelangrijk: de beste koffie!</p></td>
-        				<td><p lang="en" class="en">(en)<br>repair, maintenance, restauration and customizing of motorbikes.</p><p>For oldfashioned craftsmanship and prices.</p><p>And not unimportant: the best coffee!</p></td>
-        				<td>
-				        	<p class="contact">
-				        	contact<br>
-				        		<b>Wang Motorcycles</b><br>
-								Pastoorswarande 50<br>
-								2513 TZ Den Haag<br>
-								The Netherlands<br><br>
-								+31 (0) 617 458 725<br>
-								<span id="email" style="height:1em;background-color:rgba(255, 255, 255, 0.1);cursor:text">e-mail</span><br>
-
-							</p>
-							<iframe id="contactMap" class="actAsDiv" width="400" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;q=Pastoorswarande%2050%2C%20Den%20Haag&amp;aq=0&amp;ie=UTF8&amp;t=m&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
-
-						</td>
-        			</tr>
-        			<tr>
-        		</tbody>
-        	</table>
-        	
-        	
+            <div class="content_text">
+                <p lang="nl" class="nl">(nl)<br>reparatie, onderhoud, restauratie en ombouw van motorfietsen.</p><p>Voor ouderwets vakmanschap en prijzen.</p><p>En niet geheel onbelangrijk: de beste koffie!</p>
+            </div>
+            <div class="content_text">
+                <p lang="en" class="en">(en)<br>repair, maintenance, restauration and customizing of motorbikes.</p><p>For oldfashioned craftsmanship and prices.</p><p>And not unimportant: the best coffee!</p>
+            </div>
+            <div class="content_text">
+                                <p class="contact">contact<br>
+                                <b>Wang Motorcycles</b><br>
+                                Pastoorswarande 50<br>
+                                2513 TZ Den Haag<br>
+                                The Netherlands<br><br>
+                                +31 (0) 617 458 725<br>
+                                <span id="email" style="height:1em;background-color:rgba(255, 255, 255, 0.1);cursor:text">e-mail</span><br>
+                                <img id="maps" src="util/wang_motors_maps.png">
+                </p>
+            </div>        	
         </div>
 
 	   	<script type="text/javascript">
