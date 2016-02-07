@@ -187,8 +187,8 @@ td {
 	position: relative;
 	float: left;
 	margin: 1em 0px 0px 0px;
-	-webkit-filter: saturate(0);
-	z-index:-101 !important;
+	/*-webkit-filter: saturate(0);*/
+	/*z-index:-101 !important;*/
 }
 #contactText {
 	margin: 140px 0px 0px 0px;

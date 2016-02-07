@@ -87,10 +87,10 @@
         <div id="content">
         	<!-- <h1>Wang Motorcycles</h1> -->
             <div class="content_text">
-                <p lang="nl" class="nl">(nl)<br>reparatie, onderhoud, restauratie en ombouw van motorfietsen.</p><p>Voor ouderwets vakmanschap en prijzen.</p><p>En niet geheel onbelangrijk: de beste koffie!</p>
+                <p lang="nl" class="nl">(nl)<br>reparatie, onderhoud, restauratie <nobr>en ombouw</nobr> van motorfietsen.</p><p>Voor ouderwets vakmanschap <nobr>en prijzen.</nobr></p><p>En niet geheel onbelangrijk: <nobr>de beste koffie!</nobr></p>
             </div>
             <div class="content_text">
-                <p lang="en" class="en">(en)<br>repair, maintenance, restauration and customizing of motorbikes.</p><p>For oldfashioned craftsmanship and prices.</p><p>And not unimportant: the best coffee!</p>
+                <p lang="en" class="en">(en)<br>repair, maintenance, restauration <nobr>and customizing</nobr> of motorbikes.</p><p>For oldfashioned craftsmanship <nobr>and prices.</nobr></p><p>And not unimportant: <nobr>the best coffee!</nobr></p>
             </div>
             <div class="content_text">
                                 <p class="contact">contact<br>
@@ -100,7 +100,7 @@
                                 The Netherlands<br><br>
                                 +31 (0) 617 458 725<br>
                                 <span id="email" style="height:1em;background-color:rgba(255, 255, 255, 0.1);cursor:text">e-mail</span><br>
-                                <iframe id="maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.0854852538905!2d4.301140715626219!3d52.07817367973293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5b726af3810a9%3A0x292adbabb9d4ab99!2sWang+Motorcycles!5e0!3m2!1sen!2snl!4v1454858113132" width="400" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>                </p>
+                                <iframe id="contactMap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.0854852538905!2d4.301140715626219!3d52.07817367973293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5b726af3810a9%3A0x292adbabb9d4ab99!2sWang+Motorcycles!5e0!3m2!1sen!2snl!4v1454858113132" width="400" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>                </p>
             </div>        	
         </div>
 

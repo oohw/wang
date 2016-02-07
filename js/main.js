@@ -50,10 +50,10 @@ function init() {
             }
         }, 0);
    	});
-    $('#contactMap').mouseover(function() {
+    $('.content_text').mouseover(function() {
         slideshowloop = false;
     });
-    $('#contactMap').mouseout(function() {
+    $('.content_text').mouseout(function() {
         slideshowloop = true;
         var current = $('.slideshowImage').get(slideshowIndex);
         var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
@@ -61,7 +61,7 @@ function init() {
             if (!slideshowactive) {
                 animateLoop(current, goLeft);
             }
-        }, 0);
+        }, 2000);
     });
 };
 
@@ -102,9 +102,9 @@ function changeContentHeight(){
         $('.content_text').width((width/3)-40);
     }
     if ( 340 > $($('.content_text')[2]).outerWidth() ){
-        $('#maps').width($($('.content_text')[2]).outerWidth());
+        $('#contactMap').width($($('.content_text')[2]).outerWidth());
     } else {
-        $('#maps').width(340);
+        $('#contactMap').width(340);
     }
         // console.log( $($('.content_text')[2]).outerWidth() );
 }
@@ -147,60 +147,63 @@ function startSlideshow() {
 };
 
 function animateLoop(object, goal) {
-    slideshowactive = true;
-    $("#animator").css('font-size', width).animate({
-        fontSize: goal
-    }, {
-        duration: 800,
-        easing: 'swing',
-        step: function(now, fx) {
-            $(object).css('left', now);
-        },
-        complete: function() {
-            $("#animator").css('font-size', $(object).offset().left).animate({
-                fontSize: goal - slideshow_margin * 2
-            }, {
-                duration: 4000,
-                easing: 'linear',
-                step: function(now, fx) {
-                    $(object).css('left', now);
-                },
-                complete: function() {
-                    $("#animator").css('font-size', $(object).offset().left).animate({
-                        fontSize: -$(object).outerWidth()
-                    }, {
-                        duration: 600,
-                        easing: 'easeOutExpo',
-                        step: function(now, fx) {
-                            $(object).css('left', now);
-                        },
-                        complete: function() {
-                            $('.slideshowImage').css('left', (width) + "px");
-                            slideshowIndex++;
-                            slideshowIndex %= $('.slideshowImage').size();
-                            var current = $('.slideshowImage').get(slideshowIndex);
-                            var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
-                            if (slideshowloop) {
-                                // console.log("start slideshow");
-                                setTimeout(function() {
-                                    animateLoop(current, goLeft);
-                                }, 2000);
-                            } else {
-                                // console.log("not start slideshow");
-                                slideshowactive = false;
-                            }
+    if(slideshowloop){
+        
+        slideshowactive = true;
+        $("#animator").css('font-size', width).animate({
+            fontSize: goal
+        }, {
+            duration: 800,
+            easing: 'swing',
+            step: function(now, fx) {
+                $(object).css('left', now);
+            },
+            complete: function() {
+                $("#animator").css('font-size', $(object).offset().left).animate({
+                    fontSize: goal - slideshow_margin * 2
+                }, {
+                    duration: 4000,
+                    easing: 'linear',
+                    step: function(now, fx) {
+                        $(object).css('left', now);
+                    },
+                    complete: function() {
+                        $("#animator").css('font-size', $(object).offset().left).animate({
+                            fontSize: -$(object).outerWidth()
+                        }, {
+                            duration: 600,
+                            easing: 'easeOutExpo',
+                            step: function(now, fx) {
+                                $(object).css('left', now);
+                            },
+                            complete: function() {
+                                $('.slideshowImage').css('left', (width) + "px");
+                                slideshowIndex++;
+                                slideshowIndex %= $('.slideshowImage').size();
+                                var current = $('.slideshowImage').get(slideshowIndex);
+                                var goLeft = (width - $(current).outerWidth()) * 0.5 + slideshow_margin;
+                                if (slideshowloop) {
+                                    // console.log("start slideshow");
+                                    setTimeout(function() {
+                                        animateLoop(current, goLeft);
+                                    }, 2000);
+                                } else {
+                                    // console.log("not start slideshow");
+                                    slideshowactive = false;
+                                }
 
-                        }
-                    });
-                }
-            });
-        }
-    });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
 }
 
 function resizeMap(){
-    var mh = height-($("#maps").offset().top + (height-$("#menuInstagram").offset().top));
-    $("#maps").height(mh);
+    var mh = height-($("#contactMap").offset().top + (height-$("#menuInstagram").offset().top));
+    $("#contactMap").height(mh);
 }
 
 // tools
