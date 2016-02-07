@@ -14,7 +14,7 @@
         <script src="js/jquery-ui.js"></script>
         <script src="js/jquery.easing.1.3.js"></script>
         <script src="js/util.js"></script>
-        <div id="bg"></div>
+        <!-- <div id="bg"></div> -->
 
         <div id="gallery">
         </div>
