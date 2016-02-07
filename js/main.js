@@ -131,7 +131,7 @@ function layoutSlideshow() {
     //     }
     // });
     slideshow_margin = Math.round(width * 0.1);
-    $('.slideshowImage').css('height', (height - height*0.0) + 'px');
+    $('.slideshowImage').css('height', (height - height*0.1) + 'px');
     $('.slideshowImage').css('width', 'auto');
     $('#slideshow').outerHeight(height);
     $('#slideshow').outerWidth(width);
