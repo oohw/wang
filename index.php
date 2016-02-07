@@ -100,8 +100,7 @@
                                 The Netherlands<br><br>
                                 +31 (0) 617 458 725<br>
                                 <span id="email" style="height:1em;background-color:rgba(255, 255, 255, 0.1);cursor:text">e-mail</span><br>
-                                <img id="maps" src="util/wang_motors_maps.png">
-                </p>
+                                <iframe id="maps" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2452.0854852538905!2d4.301140715626219!3d52.07817367973293!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5b726af3810a9%3A0x292adbabb9d4ab99!2sWang+Motorcycles!5e0!3m2!1sen!2snl!4v1454858113132" width="400" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>                </p>
             </div>        	
         </div>
 

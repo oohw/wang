@@ -71,6 +71,7 @@ function layout() {
     height = $(window).outerHeight();
 
     changeContentHeight();
+    resizeMap();
     var menuFontsizeH = height*0.03 > 12 ? height*0.03 > 20 ? 20 : height*0.03 : 12;
     var menuFontsizeW = width*0.03 > 12 ? width*0.03 > 20 ? 20 : width*0.03 : 12;
     var menuFontsize = menuFontsizeH < menuFontsizeW ? menuFontsizeH : menuFontsizeW;
@@ -100,12 +101,12 @@ function changeContentHeight(){
         $('#content').center(true, true);
         $('.content_text').width((width/3)-40);
     }
-    if ( 240 > $($('.content_text')[2]).outerWidth() ){
+    if ( 340 > $($('.content_text')[2]).outerWidth() ){
         $('#maps').width($($('.content_text')[2]).outerWidth());
     } else {
-        $('#maps').width(240);
+        $('#maps').width(340);
     }
-        console.log( $($('.content_text')[2]).outerWidth() );
+        // console.log( $($('.content_text')[2]).outerWidth() );
 }
 
 
@@ -195,6 +196,11 @@ function animateLoop(object, goal) {
             });
         }
     });
+}
+
+function resizeMap(){
+    var mh = height-($("#maps").offset().top + (height-$("#menuInstagram").offset().top));
+    $("#maps").height(mh);
 }
 
 // tools
