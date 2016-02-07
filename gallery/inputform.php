@@ -18,18 +18,37 @@
     <textarea class="en" name="description_en" id="description_en" rows="4" cols="50" placeholder="description_en"></textarea><br>
     <hr>
     <div id="images">
-	    <p>image 1:</p>
-	    <input class="nl"  type="text" name="imagetitle0_nl" id="imagetitle0_nl" placeholder="motor" value="Motor"><br>
-	    <input class="en" type="text" name="imagetitle0_en" id="imagetitle0_en" placeholder="motor" value="Motor"><br>
-	    <input type="file" name="fileToUpload0" id="fileToUpload0"><br>
+    <p>drag and drop the images here:</p>
+        <input id="drop-area" type="file" id="fileToUpload0" multiple="multiple" name="filesToUpload[]"><br>
     </div>
     <hr>
-    <input type="text" name="imageamount" id="imageamount" value="1"><br>
-    <button id="more" type="button">...add one more image to this group</button><br>
     <input type="submit" value="Upload everything" name="submit">
     <input type="reset" value="reset" name="reset">
 </form>
+
 <script>
+    $("#drop-area").on('dragenter', function (e){
+        // e.preventDefault();
+        $(this).css('background', '#0f0');
+    });
+
+    $("#drop-area").on('dragleave', function (e){
+        // e.preventDefault();
+        $(this).css('background', '#ffffee');
+    });
+
+    $("#drop-area").on('dragover', function (e){
+        // e.preventDefault();
+    });
+    $("#drop-area").on('drop', function (e){
+        $(this).css('background', '#0f0');
+        // e.preventDefault();
+        var images = e.originalEvent.dataTransfer.files;
+        for(var i = 0; i < images.length; i++){
+            console.log(images[i].name);
+        }
+    });
+
 imageindex = 0;
 jQuery.fn.center = function (doTop, doLeft) {
     this.css("position","absolute");

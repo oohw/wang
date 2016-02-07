@@ -31,11 +31,7 @@
 
 echo "project " . $_POST["title_nl"] . ':<br>';
 
-$amountimages = intval($_POST["imageamount"]);
-
-echo "amount images: " . $amountimages;
-
-$thumbs = json_decode(file_get_contents("test.json"),true);
+$thumbs = json_decode(file_get_contents("images.json"),true);
 $totalindex = sizeof($thumbs["thumbs"]);
 
 $galleryimages = array();
@@ -47,31 +43,35 @@ $galleryimages["description_en"] = $_POST["description_en"];
 
 $uploadTotalOk = 1;
 
-for($index = 0; $index < $amountimages; $index++){
-    $galleryimages["images"][] = uploadImageEtc($index);
+if ($_FILES['filesToUpload']) {
+    $file_ary = reArrayFiles($_FILES['filesToUpload']);
+
+    foreach ($file_ary as $file) {
+        $galleryimages["images"][] = uploadImageEtc($file);
+    }
 }
 
 $thumbs["thumbs"][] = $galleryimages;
 
 $options = array('ftp' => array('overwrite' => true)); 
 $stream = stream_context_create($options); 
-file_put_contents("test.json",json_encode($thumbs));
+file_put_contents("images.json",json_encode($thumbs));
 echo "</div>";
 if($uploadTotalOk == 1){
     echo '<div style="background-image: url(\'../util/thumbs' . rand(0,8) . '.png\');" id="uploadbody"></div>';
 }
 
-function uploadImageEtc($index) {
+function uploadImageEtc($file) {
     global $uploadTotalOk;
     $target_dir = "img/";
     $prefix = $_POST["title_nl"] . "_";
-    $target_file = $target_dir . $prefix . basename($_FILES["fileToUpload" . $index]["name"]);
+    $target_file = $target_dir . $prefix . basename($file["name"]);
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
     // Check if image file is a actual image or fake image
     if(isset($_POST["submit"])) {
-        echo "checking " . $_FILES["fileToUpload" . $index]["tmp_name"];
-        $check = getimagesize($_FILES["fileToUpload" . $index]["tmp_name"]);
+        echo "checking " . $file["tmp_name"];
+        $check = getimagesize($file["tmp_name"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".<br>";
             $uploadOk = 1;
@@ -100,8 +100,8 @@ function uploadImageEtc($index) {
         echo "Sorry, your file was not uploaded.<br>";
     // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES["fileToUpload" . $index]["tmp_name"], $target_file)) {
-            echo "The file ". basename( $_FILES["fileToUpload" . $index]["name"]). " has been uploaded.<br>";
+        if (move_uploaded_file($file["tmp_name"], $target_file)) {
+            echo "The file ". basename( $file["name"]). " has been uploaded.<br>";
         } else {
             echo "Sorry, there was an error uploading your file.<br>";
             $uploadOk = 0;
@@ -114,21 +114,21 @@ function uploadImageEtc($index) {
     $imgpath = 'img';
     $thumbspath = 'thumbs';
     $galleryimages = array();
-    $value = $prefix . $_FILES["fileToUpload" . $index]["name"];
+    $value = $prefix . $file["name"];
     $extension = pathinfo($value, PATHINFO_EXTENSION);
     if( $extension == 'png' || $extension == 'jpg' ) {
-        $iheight = 250;
-        $iwidth = 250 * getimagesize($imgpath.'/'.$value)[1] / getimagesize($imgpath.'/'.$value)[0];
+        $iheight = 120;
+        $iwidth = 120 * getimagesize($imgpath.'/'.$value)[0] / getimagesize($imgpath.'/'.$value)[1];
         $asjpg = basename($value, ".".$extension) . ".jpg";
         $galleryimage = array();
         $galleryimage["thumbUrl"]=$asjpg;
-        $galleryimage["title"]=$_POST["imagetitle" . $index . "_nl"];
-        $galleryimage["title_en"]=$_POST["imagetitle" . $index . "_en"];
+        $galleryimage["title"]=$file["name"];
+        $galleryimage["title_en"]=$file["name"];
         $galleryimage["theight"]=$iheight;
         $galleryimage["author"]="Wang";
         $galleryimage["name"]=$value;
         $galleryimage["twidth"]=$iwidth;
-        $galleryimage["alt"]=$_POST["imagetitle" . $index . "_nl"];
+        $galleryimage["alt"]=$file["name"];
         $imagick = new Imagick();
         $imagick->readImage($imgpath.'/'.$value);
         $imagick->resizeImage($iwidth,$iheight,Imagick::FILTER_LANCZOS,1);
@@ -143,7 +143,7 @@ function uploadImageEtc($index) {
         $imagick->setImageCompressionQuality(0);
         $imagick->writeImage('previews/'.basename($value, ".".$extension) . ".jpg");
 
-        echo 'uploaded image ' . $_POST["imagetitle" . $index . "_nl"] .  '<br><img src="previews/' . basename($value, ".".$extension) . ".jpg" . '"><br>';
+        echo 'uploaded image ' . $file["name"] .  '<br><img src="previews/' . basename($value, ".".$extension) . ".jpg" . '"><br>';
 
         return $galleryimage;
     }
@@ -180,6 +180,23 @@ function parse_size($size) {
     return round($size);
   }
 }
+
+
+function reArrayFiles(&$file_post) {
+
+    $file_ary = array();
+    $file_count = count($file_post['name']);
+    $file_keys = array_keys($file_post);
+
+    for ($i=0; $i<$file_count; $i++) {
+        foreach ($file_keys as $key) {
+            $file_ary[$i][$key] = $file_post[$key][$i];
+        }
+    }
+
+    return $file_ary;
+}
+
 ?>
 </body>
 </html>
