@@ -335,6 +335,26 @@ $(document).ready(function() {
 		$('.contentainer').hide(0);
 
 
+		$(window).resize(function() {
+			width = $(window).outerWidth();
+			height = $(window).outerHeight();
+			$('.contentainer').show(0);
+			$('.contentainer').height(height*0.75);
+			$('.contentainer').width(width*0.6);
+			$('.contentainerImg').height(height*0.75-40);
+			$('.contentainer').hide(0);
+
+			shiftUpSize = height * 0.75;
+			$(".imagearea").width(width*0.6);
+			// layout the images with new width
+			// GPlusGallery.showImages($("#imagearea"), items);
+
+			for ( var i = 0; i < data.thumbs.length; i++){
+				var items = data.thumbs[i].images;
+				GPlusGallery.showImages($("#imagearea"+i), items);
+			}
+			resizeMenuType();
+		});  
 		
 //	could be used for loading aditional images on scrolling
 //		$(window).scroll(function() {
@@ -345,26 +365,6 @@ $(document).ready(function() {
 
 	});
 	resizeMenuType();
-	$(window).resize(function() {
-		width = $(window).outerWidth();
-		height = $(window).outerHeight();
-		$('.contentainer').show(0);
-		$('.contentainer').height(height*0.75);
-		$('.contentainer').width(width*0.6);
-		$('.contentainerImg').height(height*0.75-40);
-		$('.contentainer').hide(0);
-
-		shiftUpSize = height * 0.75;
-		$(".imagearea").width(width*0.6);
-		// layout the images with new width
-		// GPlusGallery.showImages($("#imagearea"), items);
-
-		for ( var i = 0; i < data.thumbs.length; i++){
-			var items = data.thumbs[i].images;
-			GPlusGallery.showImages($("#imagearea"+i), items);
-		}
-		resizeMenuType();
-	});  
 });
 
 function resizeMenuType(){
